@@ -167,3 +167,36 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
              color="white" if cm[i, j] > threshold else "black",
              size=text_size)  
  
+ 
+import matplotlib.image as mpimg
+import os
+import pathlib
+ # Plot some random images from the data 
+def plot_random_images(data_dir):
+  """
+  Returns a plot of randomly picked images from the data.
+  """
+  # Pick a path from paths and a random image
+  paths = [dir for (dir,_,_) in os.walk(data_dir)]
+  paths = paths[1:]
+
+  plt.figure(figsize = (12, 6))
+  for i in range(6):
+    plt.subplot(2, 3, i + 1)
+    random_path = np.random.choice(paths)
+    random_image = np.random.choice(os.listdir(random_path), 1)
+
+    # Read the image
+    img = mpimg.imread(random_path + '/' + random_image[0].decode())
+    # OR
+    # os.path.join(random_path, random_image[0].decode())
+
+    # Plot the image
+    plt.imshow(img)
+    plt.title(f"{random_path.split('/')[1]}")
+    plt.xlabel(f"Image shape: {img.shape}")
+    
+  plt.tight_layout()
+  plt.show()
+
+  return img
