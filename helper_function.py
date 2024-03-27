@@ -11,27 +11,43 @@ def plot_loss_curves(history, regression = None, classification = None):
 
     # Find the losses and accuracies
     loss = history.history['loss']
-    val_loss = history.history['val_loss']
     accuracy = history.history['accuracy']
-    val_accuracy = history.history['val_accuracy']
     epochs = range(len(history.history['loss']))
-
-    # Plot the loss and accuracy curves
     plt.subplot(1, 2, 1)
-    plt.plot(epochs, loss, label = 'Training loss')
-    plt.plot(epochs, val_loss, label = 'Validation loss')
-    plt.title('Training Vs. Validation loss curves')
+    plt.plot(epochs, loss, label = 'Loss')
+    plt.title('Loss curves')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
-
+    
     plt.subplot(1, 2, 2)
-    plt.plot(epochs, accuracy, label = 'Training accuracy')
-    plt.plot(epochs, val_accuracy, label = 'Validation accuracy')
-    plt.title('Training Vs. Validation accuracy')
+    plt.plot(epochs, accuracy, label = 'Accuracy')
+    plt.title('Accuracy')
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     plt.legend()
+    
+    if val_data == True and classification == True:
+
+      val_loss = history.history['val_loss']
+      val_accuracy = history.history['val_accuracy']
+    
+      # Plot the loss and accuracy curves
+      plt.subplot(1, 2, 1)
+      plt.plot(epochs, loss, label = 'Training loss')
+      plt.plot(epochs, val_loss, label = 'Validation loss')
+      plt.title('Training Vs. Validation loss curves')
+      plt.xlabel('Epochs')
+      plt.ylabel('Loss')
+      plt.legend()
+    
+      plt.subplot(1, 2, 2)
+      plt.plot(epochs, accuracy, label = 'Training accuracy')
+      plt.plot(epochs, val_accuracy, label = 'Validation accuracy')
+      plt.title('Training Vs. Validation accuracy')
+      plt.xlabel('Epochs')
+      plt.ylabel('Accuracy')
+      plt.legend()
 
   elif regression == True and classification != True:
     # Find the losses and metric
@@ -40,22 +56,38 @@ def plot_loss_curves(history, regression = None, classification = None):
     mae = history.history['mae']
     val_mae = history.history['val_mae']
     epochs = range(len(history.history['loss']))
-
+    
     plt.subplot(1, 2, 1)
-    plt.plot(epochs, loss, label = 'Training loss')
-    plt.plot(epochs, val_loss, label = 'Validation loss')
-    plt.title('Training Vs. Validation loss curves')
+    plt.plot(epochs, loss, label = 'Loss')
+    plt.title('Loss curves')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
 
     plt.subplot(1, 2, 2)
-    plt.plot(epochs, mae, label = 'Training error')
-    plt.plot(epochs, val_mae, label = 'Validation error')
-    plt.title('Training Vs. Validation error')
+    plt.plot(epochs, mae, label = 'Error')
+    plt.title('Error')
     plt.xlabel('Epochs')
     plt.ylabel('Mean Absolute Error')
     plt.legend()
+    
+    if val_data == True and regression == True:
+
+      plt.subplot(1, 2, 1)
+      plt.plot(epochs, loss, label = 'Training loss')
+      plt.plot(epochs, val_loss, label = 'Validation loss')
+      plt.title('Training Vs. Validation loss curves')
+      plt.xlabel('Epochs')
+      plt.ylabel('Loss')
+      plt.legend()
+
+      plt.subplot(1, 2, 2)
+      plt.plot(epochs, mae, label = 'Training error')
+      plt.plot(epochs, val_mae, label = 'Validation error')
+      plt.title('Training Vs. Validation error')
+      plt.xlabel('Epochs')
+      plt.ylabel('Mean Absolute Error')
+      plt.legend()
 
   plt.tight_layout()
   plt.show()
