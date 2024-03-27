@@ -1,6 +1,6 @@
 # Define a function to plot the loss curves
 import matplotlib.pyplot as plt
-def plot_loss_curves(history, regression = None, classification = None):
+def plot_loss_curves(history, regression = None, classification = None, val_data = None):
   """
   This function plots the loss curves by accepting an input parameter history.
   """
